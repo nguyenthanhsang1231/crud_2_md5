@@ -7,23 +7,17 @@ export default function Edit() {
     let { id } = useParams();
     let navigate = useNavigate();
     const [user, setUser] = useState([]);
-    const [post, setPost] = useState({ content: '', title: '', likes: '', status: '', user: { id: '' } });
+    const [post, setPost] = useState({content: '', title: '', likes: '', status: '', user: { id: '' }});
 
     useEffect(() => {
         axios.get(`http://localhost:8080/posts/${id}`)
             .then(res => {
                 setPost(res.data);
-            })
-            .catch(error => {
-                console.error('Error fetching post data:', error);
             });
 
         axios.get('http://localhost:8080/users')
             .then(res => {
                 setUser(res.data);
-            })
-            .catch(error => {
-                console.error('Error fetching user data:', error);
             });
     }, [id]);
 
@@ -31,7 +25,7 @@ export default function Edit() {
         try {
             await axios.put(`http://localhost:8080/posts/${id}`, values);
             await axios.put(`http://localhost:8080/users/${values.user.id}`, values.user);
-            navigate('/');
+            navigate('/posts');
         } catch (error) {
             console.error('Error updating data:', error);
         }

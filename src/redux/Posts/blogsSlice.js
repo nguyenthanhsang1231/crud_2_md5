@@ -4,7 +4,7 @@ import {addBlog, getBlogs} from "../../services/postsService";
 const initialState = {
     blogs: []
 }
-const postsSlice = createSlice({
+const blogsSlice = createSlice({
     name: 'posts',
     initialState,
     reducers: {},
@@ -17,5 +17,4 @@ const postsSlice = createSlice({
         });
     }
 })
-
 export default blogsSlice.reducer;
